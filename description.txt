@@ -1,0 +1,194 @@
+﻿This mod adds dedicated utility slots for accessories that are all must-haves, so you can focus your remaining slots on your character build.
+Obviously this will have an impact on balance, so I'm working on adding a config option to disable the reforge modifiers on the utility accessories to not give too many stats.
+
+This mod was built on top of the Wing Slot mod by abluescarab.  Below is their full description of the mod, kept for posterity and credit:
+
+------
+
+!!! WARNING !!!
+Unequip your wings[edited from original: and other utility accessories!!] from the dedicated slot before updating or disabling this mod!
+
+---
+
+This mod adds a dedicated wing slot to the inventory. Now includes a config file! Access it from the in-game Mod Configuration.
+
+* Left-click a set of wings or a dye, then place it in the slot.
+* Right-click to equip wings.
+* Shift-right-click to equip wings in the vanity slot.
+* Right-click vanity wings to swap with equipped wings.
+* Left-click the eye icon on the equip slot to toggle visibility.
+
+[Known Issues]
+* Yoraiz0r's Spell eye glow doesn't work
+* Wings and character movement while flying will not display correctly in multiplayer
+* Custom location will sometimes move off screen when resizing window (use mod config to reset if needed)
+
+[Credits]
+* Blockaroz for the fantastic mod icon!
+* jopojelly for code that draws a slot to the left of the dyes; for fixing various other bugs
+* Boffin for TerraUI
+* Zsashas for bug report (custom dye incompatibility)
+* VVV101 for released updated version
+* vizthex for suggesting slot location option
+* jofairden for suggesting mod compatibility right-click overrides
+* direwolf420 for fixing the mod for 0.11.5 and adding getequipslotitem & other mod.Call()s
+* Lastprismer for the Chinese translation
+
+[Changelog]
+v1.8.4  2022-01-28
+* Fix: Items will drop correctly on death
+
+v1.8.3  2022-01-17
+* Allows resetting the custom panel location if it goes offscreen
+* Fix: Slots display on the correct equipment page
+
+v1.8.2  2022-01-14 (HOTFIX)
+* Fix: Items in custom slots should not disappear on joining multiplayer
+
+v1.8.1  2022-01-13 (HOTFIX)
+* Added Chinese translation (thanks Lastprismer!)
+* Fix: Eye icon has correct visibility after reloading game
+* Fix: Loot bags/boxes should no longer be allowed in the slots
+
+v1.8.0  2022-01-12
+* Added custom location option
+* Added moveable panel
+* Added translation files (make a pull request if you want to translate the mod!)
+* Fix: Wings and dye will be dropped if character dies in Mediumcore or Hardcore
+
+v1.7.3  2019-11-10 (HOTFIX)
+* Fix: mod.Call() keywords should work (again)
+* Fix: Cancelling mod loading won't crash the game
+
+v1.7.2  2019-11-10 (HOTFIX)
+* Fix: mod.Call() keywords work
+
+v1.7.1  2019-11-10
+* Fixed version number
+
+v1.7.0  2019-11-10
+* Fix mod for 0.11.5
+* Implemented tModLoader ModConfig
+* Add getEquipSlotItem and similar mod.Calls
+
+v1.6.3  2019-08-17
+* Build for tModLoader v0.11.4
+
+v1.6.2  2018-09-16
+* Fix: Changed equip override to right-click override and corrected functionality
+
+v1.6.1  2018-09-16
+* Fix: Wing modifiers are applied correctly
+* Fix: Dyes work with visibility off
+
+v1.6.0  2018-09-15
+* Added mod compatibility slot overrides
+
+v1.5.2  2018-06-25 (HOTFIX)
+* Fix: Mod is visible in tModLoader again
+
+v1.5.1  2018-06-23 (HOTFIX)
+* Fix: Can remove items from slots again
+
+v1.5.0  2018-06-22
+Thank you, jopojelly, for making this release possible!
+* Added multiplayer functionality
+* Fix: Applies correct dust to wings
+* Fix: Removed WingSlotPlayer.Initialize() lag
+* Fix: Can no longer place multiple dyes in dye slots
+* Fix: Can only place wings in wing slots
+
+v1.4.1  2018-05-09
+* Fix: Corrected release date in description
+
+v1.4.0  2018-05-09
+* Setting to allow equipping wings in normal accessory slot
+* Setting to change slots' location
+
+v1.3.2  2018-01-09
+* Fix: slots move correctly based on window size
+
+v1.3.1  2018-01-07
+* Removed boffin from authors
+
+v1.3.0  2018-01-07
+* Moved slots back to main equipment page
+* Fix: dyes should apply correctly
+
+v1.2.10 2017-11-06
+* Compiled for tModLoader v0.10.1
+
+v1.2.9  2017-07-12
+* Shows hover text on wing slots
+
+v1.2.8  2017-07-09
+* Updated credits
+
+v1.2.7  2017-07-09
+* Removed unneeded references
+
+v1.2.6  2017-07-09
+* Compiled for tModLoader v0.10.0.2
+* Added support for custom dyes
+
+v1.2.5  2017-03-28
+* Fix: slots work with autopause on
+
+v1.2.4  2017-01-02 (HOTFIX)
+* Fix: wing slot moved back to second equip page
+
+v1.2.3  2017-01-01
+* Moved wing slots to equip page one under accessories
+* Fix: wing slots have correct opacity
+
+v1.2.2  2016-12-28
+* Fix: mouse draws above item slots
+* Fix: dyes no longer affect other equips
+
+v1.2.1  2016-12-28 (HOTFIX)
+* Fix: game crash when using minecart
+
+v1.2.0  2016-12-27
+* Added dye slot.
+* Updated to latest TerraUI
+
+v1.1.5  2016-12-26
+* Right-clicking vanity wings will switch positions with equipped wings
+* Fix: animated wings draw correctly
+* Updated to latest TerraUI
+
+v1.1.4  2016-12-23
+* Fix: compiled for tModLoader v0.9.0.3
+* Fix: rewritten for new IO system
+* Fix: shift+click not working if equipment page is hidden
+* Updated to latest TerraUI
+
+v1.1.3  2016-10-01
+* Fix: compiled for Terraria 1.3.3.2
+* Fix: slots moved to left of PVP icon
+
+v1.1.2  2016-08-14
+* Fix: wings are no long duplicated when left-clicking slot
+* Fix: vanity wings are no longer moved to the accessory wing slot on load
+
+v1.1.1  2016-08-13
+* Fix: can no longer interact with slots when they are not visible
+
+v1.1.0  2016-08-10
+* Added vanity slot
+* Visibility button added to wing slot
+* Visibility can be changed if the wing slot is empty
+* Sound is played when visibility is changed
+* Visibility button must be clicked instead of the whole slot
+* Updated to TerraUI
+
+v1.0.3  2016-08-09
+* Fix: Wings can no longer be moved to the coin or ammo slots
+
+v1.0.2  2016-08-07
+* Now saves visibility setting
+
+v1.0.1  2016-08-07
+* Added Boffin to authors
+
+v1.0.0  2016-08-07

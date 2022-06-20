@@ -1,0 +1,10 @@
+﻿displayName=Utility Slots
+author=thedoctor
+version=0.1.0
+noCompile=false
+homepage=https://github.com/wozniakty/tModLoader-UtilitySlots
+hideCode=false
+hideResources=false
+includeSource=true
+buildIgnore=*.csproj, *.user, obj\*, bin\*, .vs\*, .git*, *.md, old\*
+includePDB=true
