@@ -13,50 +13,54 @@ namespace UtilitySlots {
         public static UtilitySlotsConfig Instance;
 
         [DefaultValue(false)]
-        [Label("$Mods.WingSlot.AllowAccessorySlots_Label")]
+        [Label("$Mods.UtilitySlot.AllowAccessorySlots_Label")]
         public bool AllowAccessorySlots;
 
-        [Header("$Mods.WingSlot.SlotLocation_Header")]
+        /*[Header("$Mods.UtilitySlot.SlotLocation_Header")]
         [DefaultValue(AccessorySlotsUI.Location.Accessories)]
-        [Label("$Mods.WingSlot.SlotLocation_Label")]
+        [Label("$Mods.UtilitySlot.SlotLocation_Label")]
         [DrawTicks]
         public AccessorySlotsUI.Location SlotLocation;
 
         [DefaultValue(false)]
-        [Tooltip("$Mods.WingSlot.ShowCustomLocationPanel_Tooltip")]
-        [Label("$Mods.WingSlot.ShowCustomLocationPanel_Label")]
+        [Tooltip("$Mods.UtilitySlot.ShowCustomLocationPanel_Tooltip")]
+        [Label("$Mods.UtilitySlot.ShowCustomLocationPanel_Label")]
         public bool ShowCustomLocationPanel;
 
         [DefaultValue(false)] 
-        [Tooltip("$Mods.WingSlot.ResetCustomSlotLocation_Tooltip")]
-        [Label("$Mods.WingSlot.ResetCustomSlotLocation_Label")]
-        public bool ResetCustomSlotLocation;
+        [Tooltip("$Mods.UtilitySlot.ResetCustomSlotLocation_Tooltip")]
+        [Label("$Mods.UtilitySlot.ResetCustomSlotLocation_Label")]
+        public bool ResetCustomSlotLocation;*/
 
         public override void OnChanged() {
-            if(UtilitySlots.UI == null) return;
+            if(UtilitySlots.WingUI == null || UtilitySlots.BalloonUI == null || UtilitySlots.ShoeUI == null) return;
 
-            if(lastSlotLocation == AccessorySlotsUI.Location.Custom && SlotLocation != AccessorySlotsUI.Location.Custom) {
+            /*if(lastSlotLocation == AccessorySlotsUI.Location.Custom && SlotLocation != AccessorySlotsUI.Location.Custom) {
                 ShowCustomLocationPanel = false;
-            }
+            }*/
 
-            UtilitySlots.UI.Panel.Visible = ShowCustomLocationPanel;
-            UtilitySlots.UI.Panel.CanDrag = ShowCustomLocationPanel;
+            UtilitySlots.WingUI.Panel.Visible = false;
+            UtilitySlots.WingUI.Panel.CanDrag = false;
+            UtilitySlots.BalloonUI.Panel.Visible = false;
+            UtilitySlots.BalloonUI.Panel.CanDrag = false;
+            UtilitySlots.ShoeUI.Panel.Visible = false;
+            UtilitySlots.ShoeUI.Panel.CanDrag = false;
 
-            if(ShowCustomLocationPanel) {
+            /*if(ShowCustomLocationPanel) {
                 SlotLocation = AccessorySlotsUI.Location.Custom;
             }
 
             if(SlotLocation == AccessorySlotsUI.Location.Custom) {
-                UtilitySlots.UI.MoveToCustomPosition();
+                UtilitySlots.WingUI.MoveToCustomPosition();
             }
 
             lastSlotLocation = SlotLocation;
-            UtilitySlots.UI.PanelLocation = SlotLocation;
+            UtilitySlots.WingUI.PanelLocation = SlotLocation;
 
             if(ResetCustomSlotLocation) {
-                UtilitySlots.UI.ResetPosition();
+                UtilitySlots.WingUI.ResetPosition();
                 ResetCustomSlotLocation = false;
-            }
+            }*/
         }
     }
 }

@@ -16,23 +16,37 @@ namespace UtilitySlots {
         private static List<Func<bool>> rightClickOverrides;
 
         private UserInterface wingSlotInterface;
+        private UserInterface balloonSlotInterface;
+        private UserInterface shoeSlotInterface;
 
-        public static WingSlotUI UI;
+        public static WingSlotUI WingUI;
+        public static BalloonSlotUI BalloonUI;
+        public static ShoeSlotUI ShoeUI;
 
         public override void Load() {
             rightClickOverrides = new List<Func<bool>>();
 
             if(!Main.dedServ) {
                 wingSlotInterface = new UserInterface();
-                UI = new WingSlotUI();
+                balloonSlotInterface = new UserInterface();
+                shoeSlotInterface = new UserInterface();
+                WingUI = new WingSlotUI();
+                BalloonUI = new BalloonSlotUI();
+                ShoeUI = new ShoeSlotUI();
 
-                UI.Activate();
-                wingSlotInterface.SetState(UI);
+                WingUI.Activate();
+                BalloonUI.Activate();
+                ShoeUI.Activate();
+                wingSlotInterface.SetState(WingUI);
+                balloonSlotInterface.SetState(BalloonUI);
+                shoeSlotInterface.SetState(ShoeUI);
             }
         }
 
         public override void Unload() {
-            UI.Unload();
+            WingUI.Unload();
+            BalloonUI.Unload();
+            ShoeUI.Unload();
 
             if(rightClickOverrides == null) return;
 
@@ -41,27 +55,49 @@ namespace UtilitySlots {
         }
 
         public override void UpdateUI(GameTime gameTime) {
-            if(UI.IsVisible) {
+            if(WingUI.IsVisible)
                 wingSlotInterface?.Update(gameTime);
-            }
+            if(BalloonUI.IsVisible)
+                balloonSlotInterface?.Update(gameTime);
+            if(ShoeUI.IsVisible)
+                shoeSlotInterface?.Update(gameTime);
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers) {
             int inventoryLayer = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Inventory"));
-
-            if(inventoryLayer != -1) {
+            
+            if (inventoryLayer != -1) {
                 layers.Insert(
                     inventoryLayer,
                     new LegacyGameInterfaceLayer(
                       "Wing Slot: Custom Slot UI",
                       () => {
-                          if(UI.IsVisible) {
+                          if(WingUI.IsVisible)
                               wingSlotInterface.Draw(Main.spriteBatch, new GameTime());
-                          }
-
                           return true;
                       },
                       InterfaceScaleType.UI));
+                layers.Insert(
+                    inventoryLayer,
+                    new LegacyGameInterfaceLayer(
+                      "Balloon Slot: Custom Slot UI",
+                      () => {
+                          if (BalloonUI.IsVisible)
+                              balloonSlotInterface.Draw(Main.spriteBatch, new GameTime());
+                          return true;
+                      },
+                      InterfaceScaleType.UI));
+                layers.Insert(
+                    inventoryLayer,
+                    new LegacyGameInterfaceLayer(
+                      "Shoe Slot: Custom Slot UI",
+                      () => {
+                          if (ShoeUI.IsVisible)
+                              shoeSlotInterface.Draw(Main.spriteBatch, new GameTime());
+                          return true;
+                      },
+                      InterfaceScaleType.UI));
+
             }
         }
 
@@ -77,19 +113,39 @@ namespace UtilitySlots {
                     case "getconfig":
                         return new Dictionary<string, object> {
                             { "AllowAccessorySlots", UtilitySlotsConfig.Instance.AllowAccessorySlots },
-                            { "SlotLocation", UtilitySlotsConfig.Instance.SlotLocation },
-                            { "ShowCustomLocationPanel", UtilitySlotsConfig.Instance.ShowCustomLocationPanel }
+                            //{ "SlotLocation", UtilitySlotsConfig.Instance.SlotLocation },
+                            //{ "ShowCustomLocationPanel", UtilitySlotsConfig.Instance.ShowCustomLocationPanel }
                         };
-                    case "getequip":
-                        return UI.EquipSlot.Item;
-                    case "getvanity":
-                    case "getsocial":
-                        return UI.SocialSlot.Item;
-                    case "getdye":
-                        return UI.DyeSlot.Item;
-                    case "getvisible":
-                        return UI.SocialSlot.Item.stack > 0 ? UI.SocialSlot.Item
-                                                                    : UI.EquipSlot.Item;
+                    case "getwingequip":
+                        return WingUI.EquipSlot.Item;
+                    case "getwingvanity":
+                    case "getwingsocial":
+                        return WingUI.SocialSlot.Item;
+                    case "getwingdye":
+                        return WingUI.DyeSlot.Item;
+                    case "getwingvisible":
+                        return WingUI.SocialSlot.Item.stack > 0 ? WingUI.SocialSlot.Item
+                                                                    : WingUI.EquipSlot.Item;
+                    case "getballoonequip":
+                        return BalloonUI.EquipSlot.Item;
+                    case "getballoonvanity":
+                    case "getballoonsocial":
+                        return BalloonUI.SocialSlot.Item;
+                    case "getballoondye":
+                        return BalloonUI.DyeSlot.Item;
+                    case "getballoonvisible":
+                        return BalloonUI.SocialSlot.Item.stack > 0 ? BalloonUI.SocialSlot.Item
+                                                                    : BalloonUI.EquipSlot.Item;
+                    case "getshoeequip":
+                        return ShoeUI.EquipSlot.Item;
+                    case "getshoevanity":
+                    case "getshoesocial":
+                        return ShoeUI.SocialSlot.Item;
+                    case "getshoedye":
+                        return ShoeUI.DyeSlot.Item;
+                    case "getshoevisible":
+                        return ShoeUI.SocialSlot.Item.stack > 0 ? ShoeUI.SocialSlot.Item
+                                                                    : ShoeUI.EquipSlot.Item;
                     case "add":
                     case "remove":
                         // wingSlot.Call(/* "add" or "remove" */, /* func<bool> returns true to cancel/false to continue */);

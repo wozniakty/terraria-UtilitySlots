@@ -9,6 +9,7 @@ using Terraria.ModLoader;
 namespace UtilitySlots.UI {
     public class SlotProps
     {
+        public string Tag { get; set; }
         public string TextureName { get; set; }
         public Func<Item, bool> IsValidItem { get; set; }
         public string HoverTextLanguageField { get; set; }
@@ -21,68 +22,68 @@ namespace UtilitySlots.UI {
     //TODO: Figure out how to make it not just balloons, but ballons/cloud in a bottle/horseshoe, and then rename to jump slot
     public class BalloonSlotUI : UtilitySlotUI
     {
-        public override SlotProps GetProps() => new SlotProps
+        public BalloonSlotUI() : base(new SlotProps
         {
+            Tag = "BalloonSlot",
             TextureName = "BalloonSlotBackground",
             IsValidItem = item => item.balloonSlot > 0,
             HoverTextLanguageField = "Mods.UtilitySlots.Balloons",
             SocialHoverTextLanguageField = "Mods.UtilitySlots.SocialBalloons",
             AccessoriesRowsToSkip = 8,
             UniquesRowsToSkip = 5
-        };
+        })
+        { }
     }
 
     public class WingSlotUI : UtilitySlotUI
     {
-        public override SlotProps GetProps() => new SlotProps
+        public WingSlotUI() : base(new SlotProps
         {
+            Tag = "WingSlot",
             TextureName = "WingSlotBackground",
             IsValidItem = item => item.wingSlot > 0,
             HoverTextLanguageField = "Mods.UtilitySlots.Wings",
             SocialHoverTextLanguageField = "Mods.UtilitySlots.SocialWings",
             AccessoriesRowsToSkip = 7,
             UniquesRowsToSkip = 4
-        };
+        })
+        { }
     }
     public class ShoeSlotUI : UtilitySlotUI
     {
-        public override SlotProps GetProps() => new SlotProps
+        public ShoeSlotUI() : base(new SlotProps
         {
+            Tag = "ShoeSlot",
             TextureName = "ShoeSlotBackground",
             IsValidItem = item => item.shoeSlot > 0,
             HoverTextLanguageField = "Mods.UtilitySlots.Shoes",
             SocialHoverTextLanguageField = "Mods.UtilitySlots.SocialShoes",
             AccessoriesRowsToSkip = 9,
             UniquesRowsToSkip = 6
-        };
+        }){ }
     }
 
 
     public class UtilitySlotUI : AccessorySlotsUI {
+        public readonly SlotProps Props;
 
-        /// <summary>
-        /// Must override this function in custom slot classes
-        /// </summary>
-        /// <returns></returns>
-        public virtual SlotProps GetProps()
-        {
-            return new SlotProps();
+        public UtilitySlotUI(SlotProps props) : base(props.Tag) {
+            Props = props;
         }
 
         public override void OnInitialize() {
             base.OnInitialize();
-            var props = GetProps();
             UtilitySlots mod = ModContent.GetInstance<UtilitySlots>();
-            CroppedTexture2D emptyTexture = new CroppedTexture2D(mod.GetTexture(props.TextureName),
+            CroppedTexture2D emptyTexture = new CroppedTexture2D(mod.GetTexture(Props.TextureName),
                                                                  CustomItemSlot.DefaultColors.EmptyTexture);
 
-            EquipSlot.IsValidItem = props.IsValidItem;
+            EquipSlot.IsValidItem = Props.IsValidItem;
             EquipSlot.EmptyTexture = emptyTexture;
-            EquipSlot.HoverText = Language.GetTextValue(props.HoverTextLanguageField);
+            EquipSlot.HoverText = Language.GetTextValue(Props.HoverTextLanguageField);
 
-            SocialSlot.IsValidItem = props.IsValidItem;
+            SocialSlot.IsValidItem = Props.IsValidItem;
             SocialSlot.EmptyTexture = emptyTexture;
-            SocialSlot.HoverText = Language.GetTextValue(props.SocialHoverTextLanguageField);
+            SocialSlot.HoverText = Language.GetTextValue(Props.SocialHoverTextLanguageField);
 
             EquipSlot.ItemChanged += ItemChanged;
             SocialSlot.ItemChanged += ItemChanged;
@@ -91,11 +92,10 @@ namespace UtilitySlots.UI {
         }
 
         protected override Vector2 CalculatePosition() {
-            var props = GetProps();
             if(PanelLocation == Location.Accessories)
-                RowsToSkip = props.AccessoriesRowsToSkip;
+                RowsToSkip = Props.AccessoriesRowsToSkip;
             else if(PanelLocation == Location.Uniques)
-                RowsToSkip = props.UniquesRowsToSkip;
+                RowsToSkip = Props.UniquesRowsToSkip;
 
             return base.CalculatePosition();
         }
